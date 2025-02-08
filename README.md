@@ -1,11 +1,21 @@
-# Um spotsie
+# Spotsie - vefsíða með gögn frá Spotify
 
-Mig langaði til að læra að tengja vefsíðu við Spotify API svo ég bjó til þessa litlu vefsíðu.
+Vefsíða sem hýsir gögn um mest spiluðu lögin mín á Spotify (ATH ENN Í VINNSLU)
 
-Vefsíðan er enn í vinnslu og hingað til er framendinn útfærður, en ég á eftir að tengja við Spotify API.
+Ég bjó þessa vefsíðu til því mig langaði til að læra að tengja vefsíðu við Spotify API.
 
 ## Tæknistakkur
 
-Ég notaði React, Vite, Typescript, SWC fyrir Fast Refresh, Tailwind fyrir CSS-ið, Node.js
+React, Vite, Typescript, SWC, Tailwind, Node.js, Netlify
 
-Skoðaðu vefsíðuna hér: 
+## Keyrsla
+
+Skoðaðu vefsíðuna hér: https://spotsie.netlify.app
+
+Eða klónaðu hana og keyrðu með:
+
+```npm run build```
+
+og
+
+```npm run dev```
