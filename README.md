@@ -1,8 +1,11 @@
-# React + Vite
+# Tónlist Helgu
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mig langaði til að læra að tengja vefsíðu við Spotify API svo ég bjó til þessa litlu vefsíðu.
 
-Currently, two official plugins are available:
+Vefsíðan er enn í vinnslu og hingað til er framendinn útfærður, en ég á eftir að tengja við Spotify API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tæknistakkur
+
+Ég notaði React, Vite, Typescript, SWC fyrir Fast Refresh, Tailwind fyrir CSS-ið, Node.js
+
+Skoðaðu vefsíðuna hér: 
