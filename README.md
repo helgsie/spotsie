@@ -1,4 +1,4 @@
-# Tónlist Helgu
+# Um spotsie
 
 Mig langaði til að læra að tengja vefsíðu við Spotify API svo ég bjó til þessa litlu vefsíðu.
 
