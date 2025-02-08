@@ -6,7 +6,7 @@ function Card(props){
     let ar = new Date().getFullYear();
     const songName = "1. Foreign Language";
     const artistName = "Nothing But Thieves";
-    let albumCover = "public/assets/dcc.png";
+    let albumCover = "public/images/dcc.png";
 
     return(
         <a href="#" className="card flex flex-col gap-2 min-w-16 w-full">
