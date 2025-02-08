@@ -15,19 +15,19 @@ function Genres() {
                 <h2 className="font-semibold">Stefnur</h2>
                 <div className="grid grid-cols-2 rounded-lg mb-3">
                     <a href="#" className="flex transition ease-in-out hover:bg-red-100 p-2 rounded-lg gap-2 items-center">
-                        <img src="src/assets/rokk.svg" alt="" className="w-5"></img>
+                        <img src="./assets/rokk.svg" alt="" className="w-5"></img>
                         <p className="">Nútímarokk</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:bg-red-100 p-2 rounded-lg gap-3 items-center">
-                        <img src="src/assets/popp.svg" alt="" className="w-4"></img>
+                        <img src="./assets/popp.svg" alt="" className="w-4"></img>
                         <p>Popp</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:bg-red-100 p-2 rounded-lg gap-3 items-center">
-                        <img src="src/assets/kpop.svg" alt="" className="w-5"></img>
+                        <img src="./assets/kpop.svg" alt="" className="w-5"></img>
                         <p>Kpop</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:bg-red-100 p-2 rounded-lg gap-2 items-center">
-                        <img src="src/assets/indie.svg" alt="" className="w-4"></img>
+                        <img src="./assets/indie.svg" alt="" className="w-4"></img>
                         <p>Indie</p>
                     </a>
                 </div>
