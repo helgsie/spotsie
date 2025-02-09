@@ -8,7 +8,7 @@ function Chart(props) {
         <div className="flex flex-col gap-1">
             <div className="flex justify-between items-end">
                 <h1 className={`${props.titlecolor} ${props.titlebg} inline text-s font-bold`}>{props.title}</h1>
-                <p className={`text-xs ${props.titlecolor} opacity-80`}>sjá meira</p>
+                <p className={`text-xs ${props.titlecolor} opacity-80 sm:text-sm`}>sjá meira</p>
             </div>
             <div className="flex flex-row gap-2 overflow-x-auto no-scrollbar">
                 {props.cardTitle.map((title, index) => (

@@ -10,7 +10,7 @@ function Artists() {
         "Twenty One Pilots",
         "Childish Gambino",
         "Nothing But Thieves",
-        "Arcane / Fever333",
+        "CORPSE",
         "Sleep Token",
         "Bring Me the Horizon",
         "Poppy"

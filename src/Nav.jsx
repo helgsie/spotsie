@@ -20,9 +20,9 @@ function Nav() {
                 >
                     {({ isActive }) => (
                         <>
-                            <img src={`./assets/${img}`} alt={label} className="min-w-4 w-4" />
-                            <p className="text-xs">{label}</p>
-                            <div className={`border-b w-4/5 transition-colors 
+                            <img src={`./assets/${img}`} alt={label} className="min-w-4 w-4 sm:w-6 lg:w-7" />
+                            <p className="text-xs md:text-sm">{label}</p>
+                            <div className={`border-b-2 w-4/5 transition-colors 
                                 ${isActive ? 'border-lime-500' : 'border-zinc-300 group-hover:border-lime-500'}`}></div>
                         </>
                     )}

@@ -12,9 +12,6 @@ export default {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
       },
-      fontSize: {
-        'xs': '0.5rem',
-      },
     },
   },
   plugins: [],

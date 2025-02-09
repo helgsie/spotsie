@@ -7,8 +7,8 @@ function Header() {
     return(
         <header className="">
             <div className="flex flex-col gap-2 mt-4 p-2 text-center sm:text-left">
-                <h1 className="font-bold text-6xl text-lime-500">spotsie</h1>
-                <p className="text-xs">uppáhalds lögin mín sem ég mæli með!</p>
+                <h1 className="font-bold text-6xl sm:text-7xl text-lime-500">spotsie</h1>
+                <p className="text-xs sm:text-sm">uppáhalds lögin mín sem ég mæli með!</p>
             </div>
         </header>
     );

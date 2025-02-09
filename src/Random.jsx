@@ -7,9 +7,11 @@ import Randomizer from './Randomizer';
 function Random() {
     return(
         <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full">
-            <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <Header/>
-                <Nav/>
+            <div className="py-6 flex flex-col">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+                    <Header/>
+                    <Nav/>
+                </div>
                 <Randomizer/>
             </div>
         </div>
