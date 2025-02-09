@@ -6,9 +6,9 @@ function Header() {
 
     return(
         <header className="">
-            <div className="flex flex-col gap-1 text-center sm:text-left">
-                <h1 className="font-bold text-3xl text-red-300">tónlist helgu</h1>
-                <p className="text-xxs">uppáhalds lögin mín sem ég mæli með :D</p>
+            <div className="flex flex-col gap-2 mt-4 p-2 text-center sm:text-left">
+                <h1 className="font-bold text-6xl text-lime-500">spotsie</h1>
+                <p className="text-xs">uppáhalds lögin mín sem ég mæli með!</p>
             </div>
         </header>
     );

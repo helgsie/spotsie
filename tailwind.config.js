@@ -13,7 +13,7 @@ export default {
         'inter': ['Inter', 'sans-serif'],
       },
       fontSize: {
-        'xxs': '0.5rem',
+        'xs': '0.5rem',
       },
     },
   },
