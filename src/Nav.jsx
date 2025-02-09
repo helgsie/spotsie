@@ -6,10 +6,10 @@ function Nav() {
     return(
         <div className="grid grid-cols-4 gap-5 items-end">
             {[
-                { to: "/", img: "songs.svg", label: "Lög" },
-                { to: "/artists", img: "artist.png", label: "Artistar" },
-                { to: "/genres", img: "genre.svg", label: "Stefnur" },
-                { to: "/random", img: "random.svg", label: "Random" },
+                { to: "/", img: "musical-note-icon.png", label: "Lög" },
+                { to: "/artists", img: "microphone-icon.png", label: "Artistar" },
+                { to: "/genres", img: "guitar-icon.png", label: "Stefnur" },
+                { to: "/random", img: "random-icon.png", label: "Random" },
             ].map(({ to, img, label }) => (
                 <NavLink
                     key={to}
