@@ -3,9 +3,9 @@ import React from 'react'
 
 function Randomizer() {
     return(
-        <div className="py-4">
-            <div className="bg-zinc-100 rounded-lg p-4">
-                <p className="text-xs">Smelltu hér til að fá eitt lag valið af handahófi</p>
+        <div className="py-8 w-25">
+            <div className="bg-lime-500 rounded-2xl p-3">
+                <p className="text-s text-white text-center">Random lag</p>
             </div>
         </div>
     );

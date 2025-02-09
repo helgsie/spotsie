@@ -6,7 +6,7 @@ function Playlists() {
     return(
         <div className="flex flex-col gap-1">
             <h2 className="font-bold text-lg text-zinc-500">Spilunarlistar</h2>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                 <Playlist title="Vanmetið"/>
                 <Playlist title="Nýtt á árinu"/>
                 <Playlist title="Listi 3"/>

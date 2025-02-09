@@ -12,22 +12,22 @@ function Genres() {
                 <Nav/>
             </div>
             <div className="flex flex-col text-s gap-2">
-                <h2 className="font-semibold">Stefnur</h2>
-                <div className="grid grid-cols-2 rounded-lg mb-3">
+                <h2 className="font-bold text-s text-zinc-500">Stefnur</h2>
+                <div className="flex flex-col rounded-lg mb-3">
                     <a href="#" className="flex transition ease-in-out hover:text-lime-500 p-2 rounded-lg gap-2 items-center">
-                        <img src="./assets/rokk.svg" alt="" className="w-5"></img>
+                        <img src="./assets/rokk.svg" alt="" className="w-5 min-w-[10px] flex-shrink-0"></img>
                         <p className="">Nútímarokk</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:text-lime-500 p-2 rounded-lg gap-3 items-center">
-                        <img src="./assets/popp.svg" alt="" className="w-4"></img>
+                        <img src="./assets/popp.svg" alt="" className="w-4 min-w-[10px] flex-shrink-0"></img>
                         <p>Popp</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:text-lime-500 p-2 rounded-lg gap-3 items-center">
-                        <img src="./assets/kpop.svg" alt="" className="w-5"></img>
+                        <img src="./assets/kpop.svg" alt="" className="w-4 min-w-[10px] flex-shrink-0"></img>
                         <p>Kpop</p>
                     </a>
                     <a href="#" className="flex transition ease-in-out hover:text-lime-500 p-2 rounded-lg gap-2 items-center">
-                        <img src="./assets/indie.svg" alt="" className="w-4"></img>
+                        <img src="./assets/indie.svg" alt="" className="w-5 min-w-[10px] flex-shrink-0"></img>
                         <p>Indie</p>
                     </a>
                 </div>

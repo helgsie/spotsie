@@ -11,16 +11,14 @@ function Chart(props) {
                 <p className={`text-xs ${props.titlecolor} opacity-80`}>sjá meira</p>
             </div>
             <div className="flex flex-row gap-2 overflow-x-auto no-scrollbar">
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
-                <Card imageshape={props.imageshape}/>
+                {props.cardTitle.map((title, index) => (
+                    <Card 
+                        key={index}
+                        imageshape={props.imageshape} 
+                        cardTitle={`${index + 1}. ${title}`}
+                        cardSubtitle={props.cardSubtitle[index]}
+                    />
+                ))}
             </div>
         </div>
     );

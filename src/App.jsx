@@ -50,6 +50,23 @@ function App() {
       .then(data => console.log(data))
   }
 
+  let songTitle = [
+    "Bliss",
+    "Heartbeat",
+    "Foreign Language",
+    "Enemy with JID (Opening Title Version)(from the series Arcane League of Legends)",
+    "The Summoning",
+    "Overcompensate"
+  ];
+  let artistName = [
+    "Muse",
+    "Childish Gambino",
+    "Nothing But Thieves",
+    "Arcane / Fever333",
+    "Sleep Token",
+    "Twenty One Pilots"
+  ];
+
   return (
     <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full">
       <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -57,10 +74,33 @@ function App() {
         <Nav/>
       </div>
       <div className="">
-        <div className="flex flex-col gap-3">
-          <Chart imageshape="rounded-md shadow-md" title="Síðustu 4 vikur" titlecolor="text-zinc-500" titlebg="transparent"/>
-          <Chart imageshape="rounded-md shadow-md" title={new Date().getFullYear()} titlecolor="text-zinc-500" titlebg="transparent"/>
-          <Chart imageshape="rounded-md shadow-md" title="Frá upphafi" titlecolor="text-zinc-500" titlebg="transparent"/>
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3">
+            <Chart 
+              imageshape="rounded-md shadow-md"
+              cardTitle={songTitle}
+              cardSubtitle={artistName}
+              title="Síðustu 4 vikur" 
+              titlecolor="text-zinc-500" 
+              titlebg="transparent"
+            />
+            <Chart 
+              imageshape="rounded-md shadow-md" 
+              cardTitle={songTitle}
+              cardSubtitle={artistName}
+              title={new Date().getFullYear()} 
+              titlecolor="text-zinc-500" 
+              titlebg="transparent"
+            />
+            <Chart 
+              imageshape="rounded-md shadow-md" 
+              cardTitle={songTitle}
+              cardSubtitle={artistName}
+              title="Frá upphafi" 
+              titlecolor="text-zinc-500" 
+              titlebg="transparent"
+            />
+          </div>
           <Playlists/>
         </div>
       </div>
