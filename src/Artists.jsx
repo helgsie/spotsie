@@ -4,6 +4,7 @@ import Header from './Header.jsx'
 import Nav from './Nav.jsx';
 import Chart from './Chart.jsx';
 import Footer from './Footer.jsx';
+import { shuffleArray } from './Shuffle.jsx';
 
 function Artists() {
 
@@ -60,19 +61,21 @@ function Artists() {
                 <Nav/>
             </div>
             <div className="flex flex-col gap-3">
-                {chartTitles.map((chartTitle, index) => (
+                {chartTitles.map((chartTitle, index) => {
+                const shuffledArtists = shuffleArray(artists);
+                return (     
                     <Chart 
                         key={index}
                         imageShape={imageShape}
-                        albumCover={artists.map((artist) => (artist.cover))}
-                        cardTitle={artists.map((artist) => (artist.artist))}
+                        albumCover={shuffledArtists.map((artist) => (artist.cover))}
+                        cardTitle={shuffledArtists.map((artist) => (artist.artist))}
                         cardSubtitle="" 
                         chartTitle={chartTitles[index]} 
                         titlecolor="text-zinc-500" 
                         titlebg="transparent"
                         cardWidth={cardWidth}
                     />
-                ))}
+                )})}
             </div>
             <Footer/>
         </div>

@@ -8,6 +8,7 @@ import Playlists from './Playlists.jsx'
 import React, { useEffect, useState } from 'react'
 import Nav from './Nav.jsx'
 import { Buffer } from 'buffer'
+import { shuffleArray } from './Shuffle.jsx'
 
 ***REMOVED*** = "REDACTED";
 ***REMOVED*** = "REDACTED";
@@ -79,19 +80,23 @@ function App() {
       <div className="">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
-            {chartTitles.map((chartTitle, index) => (
-              <Chart 
-                key={index}
-                imageShape={imageShape}
-                albumCover={songs.map(song => song.cover)}
-                cardTitle={songs.map(song => (song.title))}
-                cardSubtitle={songs.map(song => (song.artist))}
-                chartTitle={chartTitles[index]} 
-                titlecolor="text-zinc-500" 
-                titlebg="transparent"
-                cardWidth={cardWidth}
-              />
-            ))}
+            {chartTitles.map((chartTitle, index) => {
+              const shuffledSongs = shuffleArray(songs);
+
+              return (
+                <Chart 
+                  key={index}
+                  imageShape={imageShape}
+                  albumCover={shuffledSongs.map(song => song.cover)}
+                  cardTitle={shuffledSongs.map(song => (song.title))}
+                  cardSubtitle={shuffledSongs.map(song => (song.artist))}
+                  chartTitle={chartTitles[index]} 
+                  titlecolor="text-zinc-500" 
+                  titlebg="transparent"
+                  cardWidth={cardWidth}
+                />
+              )
+          })}
           </div>
         </div>
       </div>
