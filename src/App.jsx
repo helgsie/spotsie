@@ -66,6 +66,10 @@ function App() {
     "Twenty One Pilots"
   ];
 
+  let imageShape = 'rounded-md shadow-md';
+  let albumCover = './assets/dcc.png';
+  let cardWidth = 'min-w-20 sm:min-w-32';
+
   return (
     <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full">
       <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -76,28 +80,34 @@ function App() {
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <Chart 
-              imageshape="rounded-md shadow-md"
+              imageShape={imageShape}
+              albumCover={albumCover}
               cardTitle={songTitle}
               cardSubtitle={artistName}
               title="Síðustu 4 vikur" 
               titlecolor="text-zinc-500" 
               titlebg="transparent"
+              cardWidth={cardWidth}
             />
             <Chart 
-              imageshape="rounded-md shadow-md" 
+              imageShape={imageShape}
+              albumCover={albumCover}
               cardTitle={songTitle}
               cardSubtitle={artistName}
               title={new Date().getFullYear()} 
               titlecolor="text-zinc-500" 
               titlebg="transparent"
+              cardWidth={cardWidth}
             />
             <Chart 
-              imageshape="rounded-md shadow-md" 
+              imageShape={imageShape}
+              albumCover={albumCover}
               cardTitle={songTitle}
               cardSubtitle={artistName}
               title="Frá upphafi" 
               titlecolor="text-zinc-500" 
               titlebg="transparent"
+              cardWidth={cardWidth}
             />
           </div>
           <Playlists/>

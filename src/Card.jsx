@@ -8,8 +8,8 @@ function Card(props){
     let albumCover = "./assets/dcc.png";
 
     return(
-        <a href="#" className="card flex flex-col gap-2 min-w-20 w-20 sm:min-w-32">
-            <img src={`${albumCover}`} alt="album cover" className={`${props.imageshape} shadow-slate-900 aspect-square`}></img>
+        <a href="#" className={`card flex flex-col gap-2 ${props.cardWidth} w-20`}>
+            <img src={`${props.albumCover}`} alt="album cover" className={`${props.imageshape} shadow-md shadow-slate-400 aspect-square h-auto`}></img>
             <div className="flex flex-col justify-center text-zinc-500">
                 <h2 
                     className="font-medium text-xs truncate overflow-hidden text-clip max-h-6" 

@@ -3,6 +3,7 @@ import React from "react";
 import Playlist from './Playlist.jsx'
 import Header from "./Header.jsx";
 import Nav from "./Nav.jsx";
+import Footer from './Footer.jsx';
 
 function Genres() {
     return(
@@ -32,6 +33,7 @@ function Genres() {
                     </a>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

@@ -14,9 +14,11 @@ function Chart(props) {
                 {props.cardTitle.map((title, index) => (
                     <Card 
                         key={index}
-                        imageshape={props.imageshape} 
+                        imageshape={props.imageShape}
+                        albumCover={props.albumCover}
                         cardTitle={`${index + 1}. ${title}`}
                         cardSubtitle={props.cardSubtitle[index]}
+                        cardWidth={props.cardWidth}
                     />
                 ))}
             </div>
