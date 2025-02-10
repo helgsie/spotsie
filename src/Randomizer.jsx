@@ -8,18 +8,16 @@ function Randomizer() {
     const [artistName, setArtistName] = useState('');
     const [albumCover, setAlbumCover] = useState('./assets/album-placeholder.png');
 
-    /*songTitle = 'Foreign Language';
-    artistName = 'Nothing But Thieves';
-    albumCover = './assets/dcc.png';*/
-
     const songs = [
-        { title: 'Welcome to the DCC', artist: 'Nothing But Thieves', cover:'./assets/dcc.png' },
         { title: 'Futureproof', artist: 'Nothing But Thieves', cover:'./assets/moral-panic.jpeg' },
-        { title: 'Supremacy', artist: 'Muse', cover:'./assets/2nd-law.jpeg' },
-        { title: 'Kool-Aid', artist: 'Bring Me The Horizon', cover:'./assets/nexgen.png' },
         { title: 'Bliss', artist: 'Muse', cover:'./assets/origin-of-symmetry.png' },
+        { title: 'Kool-Aid', artist: 'Bring Me The Horizon', cover:'./assets/nexgen.png' },
+        { title: 'Heartbeat', artist: 'Childish Gambino', cover:'./assets/camp.jpg' },
+        { title: 'Do You Love Me Yet?', artist: 'Nothing But Thieves', cover:'./assets/dcc.png' },
+        { title: 'The Summoning', artist: 'Sleep Token', cover:'./assets/take-me-back-to-eden.jpeg' },
         { title: 'Overcompensate', artist: 'Twenty One Pilots', cover:'./assets/clancy.png' },
-        { title: 'Heavydirtysoul', artist: 'Twenty One Pilots', cover:'./assets/blurryface.png' },
+        { title: 'Supremacy', artist: 'Muse', cover:'./assets/2nd-law.jpeg' },
+        { title: 'Doubt', artist: 'Twenty One Pilots', cover:'./assets/blurryface.png' },
     ];
 
     let imageShape = 'rounded-md shadow-md';

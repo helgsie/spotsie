@@ -13,7 +13,7 @@ import { Buffer } from 'buffer'
 ***REMOVED*** = "REDACTED";
 
 function App() {
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
     // API Access token
@@ -49,21 +49,22 @@ function App() {
       .then(data => console.log(data))
   }
 
-  let songTitle = [
-    "Bliss",
-    "Heartbeat",
-    "Foreign Language",
-    "Enemy with JID (Opening Title Version)(from the series Arcane League of Legends)",
-    "The Summoning",
-    "Overcompensate"
+  let songs = [
+    { title: 'Futureproof', artist: 'Nothing But Thieves', cover:'./assets/moral-panic.jpeg' },
+    { title: 'Bliss', artist: 'Muse', cover:'./assets/origin-of-symmetry.png' },
+    { title: 'Kool-Aid', artist: 'Bring Me The Horizon', cover:'./assets/nexgen.png' },
+    { title: 'Heartbeat', artist: 'Childish Gambino', cover:'./assets/camp.jpg' },
+    { title: 'Do You Love Me Yet?', artist: 'Nothing But Thieves', cover:'./assets/dcc.png' },
+    { title: 'Overcompensate', artist: 'Twenty One Pilots', cover:'./assets/clancy.png' },
+    { title: 'Supremacy', artist: 'Muse', cover:'./assets/2nd-law.jpeg' },
+    { title: 'Doubt', artist: 'Twenty One Pilots', cover:'./assets/blurryface.png' },
+    { title: 'The Summoning', artist: 'Sleep Token', cover:'./assets/take-me-back-to-eden.jpeg' }
   ];
-  let artistName = [
-    "Muse",
-    "Childish Gambino",
-    "Nothing But Thieves",
-    "Arcane / Fever333",
-    "Sleep Token",
-    "Twenty One Pilots"
+
+  const chartTitles = [
+    "Síðustu 4 vikur",
+    new Date().getFullYear(),
+    "Frá upphafi"
   ];
 
   let imageShape = 'rounded-md shadow-md';
@@ -79,36 +80,19 @@ function App() {
       <div className="">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
-            <Chart 
-              imageShape={imageShape}
-              albumCover={albumCover}
-              cardTitle={songTitle}
-              cardSubtitle={artistName}
-              title="Síðustu 4 vikur" 
-              titlecolor="text-zinc-500" 
-              titlebg="transparent"
-              cardWidth={cardWidth}
-            />
-            <Chart 
-              imageShape={imageShape}
-              albumCover={albumCover}
-              cardTitle={songTitle}
-              cardSubtitle={artistName}
-              title={new Date().getFullYear()} 
-              titlecolor="text-zinc-500" 
-              titlebg="transparent"
-              cardWidth={cardWidth}
-            />
-            <Chart 
-              imageShape={imageShape}
-              albumCover={albumCover}
-              cardTitle={songTitle}
-              cardSubtitle={artistName}
-              title="Frá upphafi" 
-              titlecolor="text-zinc-500" 
-              titlebg="transparent"
-              cardWidth={cardWidth}
-            />
+            {chartTitles.map((chartTitle, index) => (
+              <Chart 
+                key={index}
+                imageShape={imageShape}
+                albumCover={songs.map(song => song.cover)}
+                cardTitle={songs.map(song => (song.title))}
+                cardSubtitle={songs.map(song => (song.artist))}
+                chartTitle={chartTitles[index]} 
+                titlecolor="text-zinc-500" 
+                titlebg="transparent"
+                cardWidth={cardWidth}
+              />
+            ))}
           </div>
           <Playlists/>
         </div>
