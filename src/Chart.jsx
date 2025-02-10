@@ -18,7 +18,7 @@ function Chart(props) {
                         <Card 
                             key={index}
                             imageshape={props.imageShape}
-                            albumCover={props.albumCover[index]}
+                            albumCover={props.albumCover[index] || ""}
                             cardTitle={`${index + 1}. ${title}`}
                             cardSubtitle={cardSubtitles[index] || ""}
                             cardWidth={props.cardWidth}

@@ -17,7 +17,21 @@ function Artists() {
         "Poppy"
       ];
 
-    let albumCover = "./assets/dcc.png";
+    let artists = [
+        { artist: 'Nothing But Thieves', cover:'./assets/moral-panic.jpeg' },
+        { artist: 'Muse', cover:'./assets/origin-of-symmetry.png' },
+        { artist: 'Bring Me The Horizon', cover:'./assets/nexgen.png' },
+        { artist: 'Childish Gambino', cover:'./assets/camp.jpg' },
+        { artist: 'Twenty One Pilots', cover:'./assets/clancy.png' },
+        { artist: 'Sleep Token', cover:'./assets/take-me-back-to-eden.jpeg' }
+    ];
+
+    const chartTitles = [
+        "Síðustu 4 vikur",
+        new Date().getFullYear(),
+        "Frá upphafi"
+    ];
+
     let imageShape = 'rounded-full shadow-sm';
     let cardWidth = 'min-w-20 sm:min-w-32';
 
@@ -28,36 +42,19 @@ function Artists() {
                 <Nav/>
             </div>
             <div className="flex flex-col gap-3">
-                <Chart 
-                    imageShape={imageShape}
-                    albumCover={albumCover}
-                    cardTitle={artistName}
-                    cardSubtitle="" 
-                    title="Síðustu 4 vikur" 
-                    titlecolor="text-zinc-500" 
-                    titlebg="transparent"
-                    cardWidth={cardWidth}
-                />
-                <Chart 
-                    imageShape={imageShape}
-                    albumCover={albumCover}
-                    cardTitle={artistName} 
-                    cardSubtitle="" 
-                    title={new Date().getFullYear()} 
-                    titlecolor="text-zinc-500" 
-                    titlebg="transparent"
-                    cardWidth={cardWidth}
-                />
-                <Chart 
-                    imageShape={imageShape}
-                    albumCover={albumCover}
-                    cardTitle={artistName} 
-                    cardSubtitle="" 
-                    title="Frá upphafi" 
-                    titlecolor="text-zinc-500" 
-                    titlebg="transparent"
-                    cardWidth={cardWidth}
-                />
+                {chartTitles.map((chartTitle, index) => (
+                    <Chart 
+                        key={index}
+                        imageShape={imageShape}
+                        albumCover={artists.map((artist) => (artist.cover))}
+                        cardTitle={artists.map((artist) => (artist.artist))}
+                        cardSubtitle="" 
+                        title={chartTitles[index]} 
+                        titlecolor="text-zinc-500" 
+                        titlebg="transparent"
+                        cardWidth={cardWidth}
+                    />
+                ))}
             </div>
             <Footer/>
         </div>
