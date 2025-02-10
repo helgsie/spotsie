@@ -72,7 +72,7 @@ function App() {
   let cardWidth = 'min-w-24 sm:min-w-32';
 
   return (
-    <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full">
+    <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full min-h-screen">
       <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-2">
         <Header/>
         <Nav/>
