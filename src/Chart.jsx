@@ -8,9 +8,9 @@ function Chart(props) {
 
     return (
         <div className="flex flex-col gap-1">
-            <div className="flex justify-between items-end">
+            <div className="flex justify-between items-end py-1">
                 <h1 className={`${props.titlecolor} ${props.titlebg} inline text-s font-bold`}>{props.chartTitle}</h1>
-                <p className={`text-xs ${props.titlecolor} opacity-80 sm:text-sm`}>sjá meira</p>
+                <p className={`text-s ${props.titlecolor} font-bold px-2 opacity-80 sm:text-sm`}></p>
             </div>
             <div className="flex flex-row gap-2 overflow-x-auto no-scrollbar">
                 {cardTitles.length > 0 ? (

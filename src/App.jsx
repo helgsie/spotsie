@@ -63,13 +63,12 @@ function App() {
 
   const chartTitles = [
     "Síðustu 4 vikur",
-    new Date().getFullYear(),
-    "Frá upphafi"
+    new Date().getFullYear()
   ];
 
   let imageShape = 'rounded-md shadow-md';
   let albumCover = './assets/dcc.png';
-  let cardWidth = 'min-w-20 sm:min-w-32';
+  let cardWidth = 'min-w-24 sm:min-w-32';
 
   return (
     <div className="font-inter text-zinc-400 bg-white px-4 sm:px-8 w-full">

@@ -28,9 +28,27 @@ function Artists() {
 
     const chartTitles = [
         "Síðustu 4 vikur",
-        new Date().getFullYear(),
-        "Frá upphafi"
+        new Date().getFullYear()
+      ];
+
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", 
+        "Maí", "Jún", "Júl", "Ágú", 
+        "Sep", "Okt", "Nóv", "Des"
     ];
+
+    const chartMonthTitles = [];
+    let year = 2025;
+    let month = 1;
+
+    while (year > 2022) {
+        chartMonthTitles.push(`${monthNames[month]} ${year}`);
+        month--;
+        if (month < 0) {
+            month = 11;
+            year--;
+        }
+    }
 
     let imageShape = 'rounded-full shadow-sm';
     let cardWidth = 'min-w-20 sm:min-w-32';
