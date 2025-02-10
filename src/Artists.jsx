@@ -24,7 +24,13 @@ function Artists() {
         { artist: 'Bring Me The Horizon', cover:'./assets/nexgen.png' },
         { artist: 'Childish Gambino', cover:'./assets/camp.jpg' },
         { artist: 'Twenty One Pilots', cover:'./assets/clancy.png' },
-        { artist: 'Sleep Token', cover:'./assets/take-me-back-to-eden.jpeg' }
+        { artist: 'Sleep Token', cover:'./assets/take-me-back-to-eden.jpeg' },
+        { artist: 'Poppy', cover:'./assets/negative-spaces.jpg' },
+        { artist: 'Fujii Kaze', cover:'./assets/love-all-serve-all.jpeg' },
+        { artist: 'Ado', cover:'./assets/utas-songs.jpeg' },
+        { artist: 'The Weeknd', cover:'./assets/starboy.png' },
+        { artist: 'DON BROCO', cover:'./assets/technology.jpeg' },
+        { artist: 'NewJeans', cover:'./assets/attention.jpeg' }
     ];
 
     const chartTitles = [
