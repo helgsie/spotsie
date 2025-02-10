@@ -49,7 +49,7 @@ function Artists() {
                         albumCover={artists.map((artist) => (artist.cover))}
                         cardTitle={artists.map((artist) => (artist.artist))}
                         cardSubtitle="" 
-                        title={chartTitles[index]} 
+                        chartTitle={chartTitles[index]} 
                         titlecolor="text-zinc-500" 
                         titlebg="transparent"
                         cardWidth={cardWidth}
