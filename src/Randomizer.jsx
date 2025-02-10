@@ -36,10 +36,10 @@ function Randomizer() {
     };
 
     return(
-        <div className="flex flex-col gap-5 min-w-100 mx-auto">
-            <h1 className="font-bold text-2xl text-zinc-600 mx-auto border-b-2 py-1 px-3">Random lag</h1>
+        <div className="flex flex-col gap-5 sm:gap-7 min-w-100 mx-auto">
+            <h1 className="font-bold text-2xl sm:text-3xl text-zinc-600 mx-auto border-b-2 py-1 px-3">Random lag</h1>
             <button 
-                className="bg-lime-500 rounded-2xl px-3 py-2 text-s text-white text-center mx-auto" 
+                className="bg-lime-500 rounded-2xl px-3 py-2 text-sm sm:text-lg text-white text-center mx-auto" 
                 onClick={displayRandomSong}
             >
                 Smelltu hér

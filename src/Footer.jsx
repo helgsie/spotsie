@@ -6,7 +6,7 @@ function Footer() {
         <footer className="container mt-24 px-6 pb-28 border-t w-full border-zinc-200">
             <div className="my-8"></div>
             <h1></h1>
-            <p className="flex justify-center text-xs">ATH. Þetta eru ekki alvöru gögn, ég á eftir að tengja við Spotify API {`:)`}</p>
+            <p className="flex justify-center text-xs">ATH. Þetta eru ekki alvöru gögn, á eftir að tengja við Spotify API {`:)`}</p>
         </footer>
     );
 }

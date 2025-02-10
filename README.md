@@ -6,7 +6,7 @@ Vefsíða sem hýsir gögn um mest spiluðu lögin mín á Spotify (ATH ENN Í V
 
 ## Tæknistakkur
 
-React, Vite, Typescript, SWC, Tailwind, Node.js, React Router, Netlify
+React, Vite, Typescript, Tailwind, Node.js, React Router, SWC, Netlify
 
 ## Keyrsla
 
