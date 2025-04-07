@@ -1,29 +1,30 @@
 'use client';
-
-import { useState } from 'react';
 import useSWR from 'swr';
-import type { TopData } from '@/types/spotify';
+import type { TopArtist, TopTrack } from '@/types/spotify';
+
+interface SpotifyTopResponse {
+    shortTerm: {
+      artists: TopArtist[];
+      tracks: TopTrack[];
+    };
+    mediumTerm: {
+      artists: TopArtist[];
+      tracks: TopTrack[];
+    };
+  }
 
 export function useSpotifyTop() {
-  const [ topArtists, setTopArtists ] = useState([]);
-  const [ topTracks, setTopTracks ] = useState([]);
-
-  const { error, isLoading } = useSWR<TopData>(
+  const { data, error, isLoading } = useSWR<SpotifyTopResponse>(
     '/api/top',
     async (url: string) => {
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          throw new Error('Failed to fetch top data');
+          throw new Error('Villa við að sækja topplista gögn');
         }
-        const data = await res.json();
-
-        setTopArtists(data.artists || []);
-        setTopTracks(data.tracks || []);
-
-        return data;
+        return res.json();
       } catch (error) {
-        console.error('Error fetching Spotify top data:', error);
+        console.error('Villa við að sækja topplista gögn:', error);
         throw error;
       }
     },
@@ -35,10 +36,7 @@ export function useSpotifyTop() {
   );
 
   return {
-    data: {
-      artists: topArtists || [],
-      tracks: topTracks || [],
-    },
+    data,
     isLoading,
     isError: error,
   };

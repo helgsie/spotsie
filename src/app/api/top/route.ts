@@ -1,33 +1,47 @@
 import { NextResponse } from 'next/server';
 import { getTopArtists, getTopTracks } from '../../../lib/spotify';
 import { normalizeArtists, normalizeTracks } from '@/lib/utils/normalizer';
-import type { SpotifyTopArtists, SpotifyTopTracks } from '@/types/spotify';
 
-type SpotifyResponse<T> = T | NextResponse<{ recently_played: boolean; message: string }> | undefined;
+//type SpotifyResponse<T> = T | NextResponse<{ recently_played: boolean; message: string }> | undefined;
 
 export async function GET(): Promise<NextResponse> {
-
-  const artistsResponse: SpotifyResponse<SpotifyTopArtists> = await getTopArtists().catch((err) => {
-    return NextResponse.json({ recently_played: false, message: 'Ertu tengd/ur?', extra: err });
-  });
-
-  const tracksResponse: SpotifyResponse<SpotifyTopTracks> = await getTopTracks().catch((err) => {
-    return NextResponse.json({ recently_played: false, message: 'Ertu tengd/ur?', extra: err });
-  });
-
-  if (artistsResponse instanceof NextResponse || tracksResponse instanceof NextResponse) {
-    return NextResponse.json({ error: 'Ekki var hægt að tengjast Spotify' }, { status: 503 });
+  try {
+    const shortTermArtistsPromise = getTopArtists(20, 'short_term');
+    const shortTermTracksPromise = getTopTracks(20, 'short_term');
+    
+    // Fetch medium-term data
+    const mediumTermArtistsPromise = getTopArtists(20, 'medium_term');
+    const mediumTermTracksPromise = getTopTracks(20, 'medium_term');
+    
+    // Wait for all promises to resolve
+    const [shortTermArtists, shortTermTracks, mediumTermArtists, mediumTermTracks] = 
+      await Promise.all([
+        shortTermArtistsPromise, 
+        shortTermTracksPromise,
+        mediumTermArtistsPromise,
+        mediumTermTracksPromise
+      ]);
+  
+    if (!shortTermArtists || !mediumTermArtists || !shortTermTracks || !mediumTermTracks) {
+      return NextResponse.json({ error: 'Villa við að sækja gögn frá Spotify' }, { status: 500 });
+    }
+  
+    return NextResponse.json({
+      shortTerm: {
+        artists: shortTermArtists.items.map(normalizeArtists),
+        tracks: shortTermTracks.items.map(normalizeTracks)
+      },
+      mediumTerm: {
+        artists: mediumTermArtists.items.map(normalizeArtists),
+        tracks: mediumTermTracks.items.map(normalizeTracks)
+      }
+    });
+  } catch (err) {
+    console.error('Óþekkt villa við að sækja Spotify gögn:', err);
+    return NextResponse.json(
+      { error: 'Ekki var hægt að tengjast Spotify' }, 
+      { status: 503 }
+    );
   }
-
-  if (!artistsResponse || !tracksResponse) {
-    return NextResponse.json({ error: 'Villa við að sækja gögn frá Spotify' }, { status: 500 });
-  }
-
-  const artists = artistsResponse.items;
-  const tracks = tracksResponse.items;
-
-  return NextResponse.json({
-    artists: artists.map(normalizeArtists),
-    tracks: tracks.map(normalizeTracks),
-  });
+  
 }

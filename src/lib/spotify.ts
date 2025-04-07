@@ -4,14 +4,6 @@ import type {
   SpotifyTopTracks,
 } from '@/types/spotify';
 
-/*const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;*/
-
 interface SpotifyConfig {
   clientId: string;
   clientSecret: string;
@@ -25,23 +17,6 @@ interface CacheEntry<T> {
   data: T;
   timestamp: number;
 }
-
-/*const getAccessToken = async () => {
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${basic}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: querystring.stringify({
-      grant_type: 'refresh_token',
-      refresh_token,
-    }),
-  });
-
-  return response.json();
-}*/
-
 
 class SpotifyClient {
   private readonly _basicEncoded: string;
@@ -128,7 +103,7 @@ class SpotifyClient {
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new error(error.message || 'Spotify API request failed', response.status, error.error);
+        throw new error(error.message || 'Spotify API beiðni mistókst', response.status, error.error);
       }
 
       return response;
@@ -171,8 +146,8 @@ class SpotifyClient {
   }
 
   async getTopArtists(
-    limit = 5,
-    timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term',
+    limit: number,
+    timeRange: 'short_term' | 'medium_term' | 'long_term',
   ): Promise<SpotifyTopArtists | undefined> {
     const params = new URLSearchParams({
       limit: limit.toString(),
@@ -183,8 +158,8 @@ class SpotifyClient {
   }
   
   async getTopTracks(
-    limit = 5,
-    timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term',
+    limit: number,
+    timeRange: 'short_term' | 'medium_term' | 'long_term',
   ): Promise<SpotifyTopTracks | undefined> {
     const params = new URLSearchParams({
       limit: limit.toString(),
@@ -201,15 +176,11 @@ const spotifyClient = new SpotifyClient({
   refreshToken: process.env.SPOTIFY_REFRESH_TOKEN as string,
 });
 
-/*export const getTopTracks = async () => {
-  const { access_token } = await getAccessToken();
-
-  return fetch(TOP_TRACKS_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-}*/
-
-export const getTopArtists = () => spotifyClient.getTopArtists();
-export const getTopTracks = () => spotifyClient.getTopTracks();
+export const getTopArtists = (
+  limit = 20,
+  timeRange: 'short_term' | 'medium_term' | 'long_term'
+) => spotifyClient.getTopArtists(limit, timeRange);
+export const getTopTracks = (
+  limit = 20,
+  timeRange: 'short_term' | 'medium_term' | 'long_term'
+) => spotifyClient.getTopTracks(limit, timeRange);

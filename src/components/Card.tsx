@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ imageShape, albumCover, cardTitle, cardSubt
                         src="/assets/album-placeholder.png" 
                         alt="album cover"
                         fill
-                        className={`${imageShape} object-cover shadow-md shadow-slate-400`}
+                        className={`${imageShape} max-w-full h-auto object-cover shadow-md shadow-slate-400`}
                         sizes="(min-width: 768px) 300px, 100vw"
                     />
                 ) : (
@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ imageShape, albumCover, cardTitle, cardSubt
                         src={albumCover} 
                         alt="album cover"
                         fill
-                        className={`${imageShape} object-cover shadow-md shadow-slate-400`}
+                        className={`${imageShape} max-w-full h-auto object-cover shadow-md shadow-slate-400`}
                         sizes="(min-width: 768px) 300px, 100vw"
                     />
                 )}
