@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Genres from '@/components/Genres';
-import Playlists from '@/components/Playlists';
+import Genres from '../../components/Genres';
+import Playlists from '../../components/Playlists';
 
 export default function Home() {
     return(

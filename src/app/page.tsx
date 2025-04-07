@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Songs from '@/components/Songs';
+import Songs from '../components/Songs';
 
 export default function Home() {
   return (

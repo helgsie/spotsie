@@ -2,13 +2,13 @@ import React from "react";
 import Card from './Card';
 
 interface ChartProps {
-    cardTitle: string[];
-    cardSubtitle: string[];
+    cardTitle: string[] | string;
+    cardSubtitle: string[] | string;
     titleColor: string;
     titleBg: string;
     chartTitle: string;
     imageShape: string;
-    albumCover: string[];
+    albumCover: string[] | string;
     cardWidth: string;
 }
 

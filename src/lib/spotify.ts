@@ -1,0 +1,215 @@
+import type {
+  SpotifyAccessToken,
+  SpotifyTopArtists,
+  SpotifyTopTracks,
+} from '@/types/spotify';
+
+/*const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;*/
+
+interface SpotifyConfig {
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+  maxRetries?: number;
+  timeout?: number;
+  cacheTTL?: number;
+}
+
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+
+/*const getAccessToken = async () => {
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token,
+    }),
+  });
+
+  return response.json();
+}*/
+
+
+class SpotifyClient {
+  private readonly _basicEncoded: string;
+  private readonly _tokenEndpoint = 'https://accounts.spotify.com/api/token';
+  private readonly _baseEndpoint = 'https://api.spotify.com/v1';
+  private readonly _maxRetries: number;
+  private readonly _timeout: number;
+  private readonly _cacheTTL: number;
+  private _accessToken: string | null = null;
+  private _tokenExpiry: number | null = null;
+  private _cache: Map<string, CacheEntry<unknown>> = new Map();
+
+  constructor(config: SpotifyConfig) {
+    this._basicEncoded = Buffer.from(`${config.clientId}:${config.clientSecret}`).toString('base64');
+    this._maxRetries = config.maxRetries ?? 3;
+    this._timeout = config.timeout ?? 5000;
+    this._cacheTTL = config.cacheTTL ?? 60 * 1000; // 1 mínúta sjálfstillt
+  }
+
+  private getCacheKey(endpoint: string, params?: URLSearchParams): string {
+    return `${endpoint}${params ? `?${params.toString()}` : ''}`;
+  }
+
+  private getFromCache<T>(key: string): T | null {
+    const entry = this._cache.get(key) as CacheEntry<T> | undefined;
+    if (!entry) return null;
+
+    const isExpired = Date.now() - entry.timestamp > this._cacheTTL;
+    if (isExpired) {
+      this._cache.delete(key);
+      return null;
+    }
+
+    return entry.data;
+  }
+
+  private setCache<T>(key: string, data: T): void {
+    this._cache.set(key, {
+      data,
+      timestamp: Date.now(),
+    });
+  }
+
+  private clearCache(): void {
+    this._cache.clear();
+  }
+
+  private async getAccessToken(): Promise<string> {
+    if (this._accessToken && this._tokenExpiry && Date.now() < this._tokenExpiry) {
+      return this._accessToken;
+    }
+
+    const params = new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: process.env.SPOTIFY_REFRESH_TOKEN as string,
+    });
+
+    const response = await this.fetchWithRetry(this._tokenEndpoint, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${this._basicEncoded}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    const data = (await response.json()) as SpotifyAccessToken;
+    this._accessToken = data.access_token;
+    this._tokenExpiry = Date.now() + data.expires_in * 1000;
+    return this._accessToken;
+  }
+
+  private async fetchWithRetry(url: string, options: RequestInit, retryCount = 0): Promise<Response> {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), this._timeout);
+
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new error(error.message || 'Spotify API request failed', response.status, error.error);
+      }
+
+      return response;
+    } catch (error) {
+      if (retryCount < this._maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 2 ** retryCount * 1000));
+        return this.fetchWithRetry(url, options, retryCount + 1);
+      }
+      throw error;
+    }
+  }
+
+  private async fetchSpotify<T>(endpoint: string, params?: URLSearchParams, skipCache = false): Promise<T> {
+    const cacheKey = this.getCacheKey(endpoint, params);
+
+    if (!skipCache) {
+      const cachedData = this.getFromCache<T>(cacheKey);
+      if (cachedData !== null) {
+        return cachedData;
+      }
+    }
+
+    const accessToken = await this.getAccessToken();
+    const url = `${this._baseEndpoint}${endpoint}${params ? `?${params.toString()}` : ''}`;
+
+    const response = await this.fetchWithRetry(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      cache: 'no-cache',
+    });
+
+    const data = (await response.json()) as T;
+
+    if (!skipCache) {
+      this.setCache(cacheKey, data);
+    }
+
+    return data;
+  }
+
+  async getTopArtists(
+    limit = 5,
+    timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term',
+  ): Promise<SpotifyTopArtists | undefined> {
+    const params = new URLSearchParams({
+      limit: limit.toString(),
+      time_range: timeRange,
+    });
+
+    return this.fetchSpotify<SpotifyTopArtists>('/me/top/artists', params);
+  }
+  
+  async getTopTracks(
+    limit = 5,
+    timeRange: 'short_term' | 'medium_term' | 'long_term' = 'short_term',
+  ): Promise<SpotifyTopTracks | undefined> {
+    const params = new URLSearchParams({
+      limit: limit.toString(),
+      time_range: timeRange,
+    });
+
+    return this.fetchSpotify<SpotifyTopTracks>('/me/top/tracks', params);
+  }
+}
+
+const spotifyClient = new SpotifyClient({
+  clientId: process.env.SPOTIFY_CLIENT_ID as string,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
+  refreshToken: process.env.SPOTIFY_REFRESH_TOKEN as string,
+});
+
+/*export const getTopTracks = async () => {
+  const { access_token } = await getAccessToken();
+
+  return fetch(TOP_TRACKS_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+}*/
+
+export const getTopArtists = () => spotifyClient.getTopArtists();
+export const getTopTracks = () => spotifyClient.getTopTracks();

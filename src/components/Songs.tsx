@@ -1,5 +1,9 @@
+'use client';
+
+import { TopTrack } from "@/types/spotify";
 import Chart from "./Chart";
-import { shuffleArray } from "./Shuffle";
+import { useEffect, useState } from 'react';
+import { useSpotifyTop } from '@/hooks/use-spotify-top';
 
 export interface Song {
     title: string;
@@ -38,6 +42,19 @@ export const songs: Song[] = [
 ];
 
 export default function Songs() {
+    const [isClient, setIsClient] = useState(false);
+    const { data, isLoading } = useSpotifyTop();
+    const tracks = data.tracks;
+
+    console.log('Fetched Tracks:', tracks);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return null;
+    }
 
     const chartTitles = [
         "Síðustu 4 vikur",
@@ -47,15 +64,43 @@ export default function Songs() {
     const imageShape = 'rounded-md shadow-md';
     const cardWidth = 'min-w-28 lg:min-w-32';
 
+    if (isLoading) {
+        return (
+            <div className="">
+                <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-3">
+                        {chartTitles.map((chartTitle, index) => {
+                            const albumCovers = '/assets/album-placeholder.png';
+                            const songTitles = '';
+                            const songArtists = '';
+                            return (
+                                <Chart 
+                                    key={index}
+                                    imageShape={imageShape}
+                                    albumCover={albumCovers}
+                                    cardTitle={songTitles}
+                                    cardSubtitle={songArtists}
+                                    chartTitle={chartTitle} 
+                                    titleColor="text-zinc-500" 
+                                    titleBg="transparent"
+                                    cardWidth={cardWidth}
+                                />
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="">
             <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-3">
                     {chartTitles.map((chartTitle, index) => {
-                        const shuffledSongs = shuffleArray(songs);
-                        const albumCovers = shuffledSongs.map(song => song.cover);
-                        const songTitles = shuffledSongs.map(song => song.title);
-                        const songArtists = shuffledSongs.map(song => song.artist);
+                        const albumCovers = tracks.map((track: TopTrack) => track.thumbnail);
+                        const songTitles = tracks.map((track: TopTrack) => track.title);
+                        const songArtists = tracks.map((track: TopTrack) => track.artist);
                         return (
                             <Chart 
                                 key={index}
