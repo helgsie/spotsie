@@ -12,7 +12,7 @@ export default function Artists() {
     }
 
     if (isLoading || !data) {
-        return <p>Sæki gögn...</p>;
+        return <p className="mx-auto">Sæki gögn...</p>;
     }
 
     console.log("Data from hook:", data);

@@ -6,12 +6,12 @@ import { normalizeArtists, normalizeTracks } from '@/lib/utils/normalizer';
 
 export async function GET(): Promise<NextResponse> {
   try {
-    const shortTermArtistsPromise = getTopArtists(20, 'short_term');
-    const shortTermTracksPromise = getTopTracks(20, 'short_term');
+    const shortTermArtistsPromise = getTopArtists(25, 'short_term');
+    const shortTermTracksPromise = getTopTracks(25, 'short_term');
     
     // Fetch medium-term data
-    const mediumTermArtistsPromise = getTopArtists(20, 'medium_term');
-    const mediumTermTracksPromise = getTopTracks(20, 'medium_term');
+    const mediumTermArtistsPromise = getTopArtists(25, 'medium_term');
+    const mediumTermTracksPromise = getTopTracks(25, 'medium_term');
     
     // Wait for all promises to resolve
     const [shortTermArtists, shortTermTracks, mediumTermArtists, mediumTermTracks] = 

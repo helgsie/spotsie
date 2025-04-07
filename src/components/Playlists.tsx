@@ -3,7 +3,7 @@ import Playlist from './Playlist';
 
 function Playlists() {
     return(
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-3">
             <h2 className="font-bold text-md text-zinc-500">Spilunarlistar</h2>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
                 <Playlist title="Vanmetið"/>

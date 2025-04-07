@@ -4,7 +4,7 @@ import Image from 'next/image';
 function Genres() {
     return(
         <div className="mainGenrePage flex flex-col gap-3">
-            <div className="flex flex-col text-md gap-2">
+            <div className="flex flex-col text-md gap-3">
                 <h1 className="font-bold text-zinc-500">Stefnur</h1>
                 <div className="flex flex-col text-sm rounded-lg mb-3">
                     <a href="#" className="flex transition ease-in-out hover:text-lime-500 p-2 rounded-lg gap-3 items-center">
