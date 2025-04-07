@@ -55,8 +55,8 @@ export default function Songs() {
                     {chartConfigs.map((config, index) => {
                         const { title, tracks, timeRange } = config;
                         const albumCovers = tracks.map((track: TopTrack) => track?.thumbnail || '/assets/album-placeholder.png');
-                        const songTitles = tracks.map((track: TopTrack) => track?.title) || 'Óþekktur lagatitill';
-                        const songArtists = tracks.map((track: TopTrack) => track?.artist) || 'Óþekktur artisti';
+                        const songTitles = tracks.map((track: TopTrack) => track?.title || 'Óþekktur lagatitill');
+                        const songArtists = tracks.map((track: TopTrack) => track?.artist.replace(/ ?- ?/g, ', ') || 'Óþekktur artisti');
                         return (
                             <Chart 
                                 key={index}
