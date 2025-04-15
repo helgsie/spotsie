@@ -11,11 +11,25 @@ interface ChartProps {
     albumCover: string[] | string;
     cardWidth: string;
     timeRange: string;
+    artistGenres: string;
+    spotifyUrl: string;
 }
 
-const Chart: React.FC<ChartProps> = ({ cardTitle, cardSubtitle, titleColor, titleBg, chartTitle, imageShape, albumCover, cardWidth, timeRange }) => {
-    const cardTitles = cardTitle || [];
-    const cardSubtitles = cardSubtitle || [];
+const Chart: React.FC<ChartProps> = ({ 
+    cardTitle, 
+    cardSubtitle, 
+    titleColor, 
+    titleBg, 
+    chartTitle, 
+    imageShape, 
+    albumCover, 
+    cardWidth, 
+    timeRange,
+    artistGenres,
+    spotifyUrl
+}) => {
+    const cardTitles = Array.isArray(cardTitle) ? cardTitle : [cardTitle];
+    const cardSubtitles = Array.isArray(cardSubtitle) ? cardSubtitle : [cardSubtitle];
 
     return (
         <div className="flex flex-col gap-1" data-time-range={timeRange}>
@@ -25,7 +39,7 @@ const Chart: React.FC<ChartProps> = ({ cardTitle, cardSubtitle, titleColor, titl
                 </h1>
                 <p className={`text-s ${titleColor} font-bold px-2 opacity-80 sm:text-sm`}></p>
             </div>
-            <div className="flex flex-row gap-2 overflow-x-auto no-scrollbar">
+            <div className="flex flex-row gap-2 overflow-x-auto overflow-y-hidden no-scrollbar">
                 {cardTitles.map((title, index) => (
                     <Card 
                         key={index}
@@ -34,6 +48,8 @@ const Chart: React.FC<ChartProps> = ({ cardTitle, cardSubtitle, titleColor, titl
                         cardTitle={`${index + 1}. ${title}`}
                         cardSubtitle={cardSubtitles[index] || ""}
                         cardWidth={cardWidth}
+                        artistGenres={artistGenres}
+                        spotifyUrl={spotifyUrl}
                     />
                 ))} 
             </div>

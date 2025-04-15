@@ -180,6 +180,7 @@ export const getTopArtists = (
   limit = 20,
   timeRange: 'short_term' | 'medium_term' | 'long_term'
 ) => spotifyClient.getTopArtists(limit, timeRange);
+
 export const getTopTracks = (
   limit = 20,
   timeRange: 'short_term' | 'medium_term' | 'long_term'

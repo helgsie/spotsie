@@ -8,6 +8,8 @@ function Randomizer() {
     const [songTitle, setSongTitle] = useState('');
     const [artistName, setArtistName] = useState('');
     const [albumCover, setAlbumCover] = useState('./assets/album-placeholder.png');
+    const [spotifyUrl, setSpotifyUrl] = useState('');
+    //const [artistGenres, setArtistGenres] = useState('');
     const { data, isLoading, isError } = useSpotifyTop();
 
     const imageShape = 'rounded-md shadow-md';
@@ -30,7 +32,9 @@ function Randomizer() {
                             albumCover="/assets/album-placeholder.png"
                             cardTitle={songTitle}
                             cardSubtitle={artistName}
-                            cardWidth={largeWidth}
+                            cardWidth={largeWidth} 
+                            artistGenres={""} 
+                            spotifyUrl={spotifyUrl}                        
                         />
                     </div>
                 )}
@@ -52,6 +56,9 @@ function Randomizer() {
         setSongTitle(songs[newIndex].title);
         setArtistName(songs[newIndex].artist);
         setAlbumCover(songs[newIndex].thumbnail);
+        console.log(songs[newIndex]);
+        setSpotifyUrl(songs[newIndex].url);
+        //setArtistGenres(songs[newIndex].genres?.join(', ') ?? '');
     };
 
     return(
@@ -65,7 +72,9 @@ function Randomizer() {
                         albumCover={albumCover}
                         cardTitle={songTitle}
                         cardSubtitle={artistName}
-                        cardWidth={largeWidth}
+                        cardWidth={largeWidth} 
+                        artistGenres={""}
+                        spotifyUrl={spotifyUrl}                    
                     />
                 </div>
             )}

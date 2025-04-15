@@ -9,30 +9,32 @@ export interface CardProps {
     cardTitle: string;
     cardSubtitle?: string;
     cardWidth: string;
+    artistGenres?: string;
+    spotifyUrl: string;
 }
 
-const Card: React.FC<CardProps> = ({ imageShape, albumCover, cardTitle, cardSubtitle, cardWidth }) => {
+const Card: React.FC<CardProps> = ({ imageShape, albumCover, cardTitle, cardSubtitle, cardWidth, spotifyUrl }) => {
     return(
-        <Link href="#" className={`card flex flex-col gap-2 ${cardWidth}`}>
-            <div className="relative w-full aspect-square">
-                {/* Skeleton Loader */}
-                {!albumCover ? (
+        <Link href={spotifyUrl} className={`card flex flex-col gap-2 ${cardWidth}`}>
+            <div className="group [perspective:1000px] w-full aspect-square">
+                <div className="relative w-full aspect-square group overflow-hidden">
+                    {/* Framhlið */}
                     <Image 
-                        src="/assets/album-placeholder.png" 
-                        alt="album cover"
+                        src={albumCover || "/assets/album-placeholder.png"} 
+                        alt="Album cover"
                         fill
-                        className={`${imageShape} max-w-full h-auto object-cover shadow-md shadow-slate-400`}
+                        className={`${imageShape} object-cover transition-opacity duration-500 group-hover:opacity-0 shadow-md shadow-slate-400`}
                         sizes="(min-width: 768px) 300px, 100vw"
                     />
-                ) : (
-                    <Image 
-                        src={albumCover} 
-                        alt="album cover"
-                        fill
-                        className={`${imageShape} max-w-full h-auto object-cover shadow-md shadow-slate-400`}
-                        sizes="(min-width: 768px) 300px, 100vw"
+                    {/* Spotify embed */}
+                    <iframe
+                        src={`https://open.spotify.com/embed/track/${spotifyUrl}?utm_source=generator`}
+                        width="100%"
+                        height="100%"
+                        allow="encrypted-media"
+                        className="absolute top-0 left-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-md"
                     />
-                )}
+                </div>
             </div>
             <div className="flex flex-col justify-center text-zinc-500">
                 <h2

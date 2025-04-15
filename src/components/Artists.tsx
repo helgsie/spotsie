@@ -12,7 +12,7 @@ export default function Artists() {
     }
 
     if (isLoading || !data) {
-        return <p className="mx-auto">Sæki gögn...</p>;
+        return <p className="mx-auto spinner">Sæki gögn...</p>;
     }
 
     console.log("Data from hook:", data);
@@ -27,6 +27,11 @@ export default function Artists() {
             title: "Síðustu 6 mánuði",
             timeRange: "mediumTerm",
             artists: data.mediumTerm.artists || []
+        },
+        {
+            title: "Síðustu 12 mánuði",
+            timeRange: "longTerm",
+            artists: data.longTerm.artists || []
         }
     ];
 
@@ -41,6 +46,9 @@ export default function Artists() {
             const { title, artists, timeRange } = config;
             const albumCovers = artists.map((artist: TopArtist) => artist?.image || '/assets/artist-placeholder.png');
             const cardTitles = artists.map((artist: TopArtist) => artist?.name) || 'Óþekktur artisti';
+            const artistGenres = artists.flatMap((artist: TopArtist) => artist?.genres || []).join(', ');
+            const spotifyUrl = artists.flatMap((artist: TopArtist) => artist?.url || []).join(', ');
+
 
             return (     
                 <Chart 
@@ -49,11 +57,13 @@ export default function Artists() {
                     albumCover={albumCovers}
                     cardTitle={cardTitles}
                     cardSubtitle={[""]}
-                    chartTitle={title} 
-                    titleColor="text-zinc-500" 
+                    chartTitle={title}
+                    titleColor="text-zinc-500"
                     titleBg="transparent"
                     cardWidth={cardWidth}
-                    timeRange={timeRange}
+                    timeRange={timeRange} 
+                    artistGenres={artistGenres} 
+                    spotifyUrl={spotifyUrl}                
                 />
             )})}
         </div>

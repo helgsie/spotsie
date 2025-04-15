@@ -15,18 +15,20 @@ export default function Songs() {
             <div className="">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-3">
-                    {["Síðustu 4 vikur", "Síðustu 6 mánuðir"].map((title, index) => (
+                    {["Síðustu 4 vikur", "Síðustu 6 mánuði", "Síðustu 12 mánuði"].map((title, index) => (
                         <Chart 
                             key={index}
                             imageShape={imageShape}
                             albumCover="/assets/album-placeholder.png"
                             cardTitle=""
                             cardSubtitle=""
-                            chartTitle={title} 
-                            titleColor="text-zinc-500" 
+                            chartTitle={title}
+                            titleColor="text-zinc-500"
                             titleBg="transparent"
                             cardWidth={cardWidth}
-                            timeRange={index === 0 ? "shortTerm" : "mediumTerm"}
+                            timeRange={index === 0 ? "shortTerm" : index === 1 ? "mediumTerm" : "longTerm"} 
+                            artistGenres={""} 
+                            spotifyUrl={""}                            
                         />
                     ))}
                     </div>
@@ -45,6 +47,11 @@ export default function Songs() {
             title: "Síðustu 6 mánuði",
             timeRange: "mediumTerm",
             tracks: data.mediumTerm?.tracks || []
+        },
+        {
+            title: "Síðustu 12 mánuði",
+            timeRange: "longTerm",
+            tracks: data.longTerm?.tracks || []
         }
     ];
 
@@ -69,6 +76,8 @@ export default function Songs() {
                                 titleBg="transparent"
                                 cardWidth={cardWidth}
                                 timeRange={timeRange}
+                                artistGenres={""}
+                                spotifyUrl={""}
                             />
                         )
                     })}

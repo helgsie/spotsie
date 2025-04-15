@@ -11,6 +11,10 @@ interface SpotifyTopResponse {
       artists: TopArtist[];
       tracks: TopTrack[];
     };
+    longTerm: {
+        artists: TopArtist[];
+        tracks: TopTrack[];
+      };
   }
 
 export function useSpotifyTop() {

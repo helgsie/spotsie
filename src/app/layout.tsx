@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Spotsie",
-  description: "hvað helgsie er að hlusta á",
+  description: "Hvað helgsie er að hlusta á.",
 };
 
 export default function RootLayout({
@@ -24,10 +24,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      <title>Spotsie</title>
+        <meta name="description" content="Hvað helgsie er að hlusta á." />
+        <meta property="og:title" content="Spotsie" />
+        <meta property="og:description" content="Hvað helgsie er að hlusta á." />
+        <meta property="og:image" content="https://spotsie.netlify.app/web-app-manifest-192x192.png" />
+        <meta property="og:url" content="https://spotsie.netlify.app" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
       </body>
     </html>
   );
