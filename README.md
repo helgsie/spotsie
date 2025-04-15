@@ -2,12 +2,15 @@
 
 Spotsie er vefsíða sem birtir hlustunargögnin mín frá Spotify API.
 
-https://spotsie.netlify.app
+https://spotsie.onrender.com
 
 ## Tæknistakkur
 - Next.js
 - React
 - Typescript
 - Tailwind
+- OAuth 2.0
+- Express
+- SWR
 - PostCSS
 - Eslint
