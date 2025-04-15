@@ -10,7 +10,6 @@ https://spotsie.onrender.com
 - Typescript
 - Tailwind
 - OAuth 2.0
-- Express
 - SWR
 - PostCSS
 - Eslint
