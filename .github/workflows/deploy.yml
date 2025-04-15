@@ -18,14 +18,15 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build
+      - name: Lint code
+        run: npm run lint
+
+      - name: Build Next.js app
         run: npm run build
 
       - name: Deploy to Render
         run: |
           curl -X POST https://api.render.com/deploy/srv-cvv5d40gjchc73c3noug?key=EwZumBYFwas
-        
-      - name: Lint code
-        run: npm run lint
+      
