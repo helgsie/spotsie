@@ -28,7 +28,7 @@ export default function Songs() {
                             cardWidth={cardWidth}
                             timeRange={index === 0 ? "shortTerm" : index === 1 ? "mediumTerm" : "longTerm"} 
                             artistGenres={""} 
-                            spotifyUrl={""}                            
+                            spotifyUrl={[""]}                            
                         />
                     ))}
                     </div>
@@ -63,6 +63,7 @@ export default function Songs() {
                         const { title, tracks, timeRange } = config;
                         const albumCovers = tracks.map((track: TopTrack) => track?.thumbnail || '/assets/album-placeholder.png');
                         const songTitles = tracks.map((track: TopTrack) => track?.title || 'Óþekktur lagatitill');
+                        const spotifyUrl = tracks.map((track: TopTrack) => track?.url || '');
                         const songArtists = tracks.map((track: TopTrack) => track?.artist.replace(/ ?- ?/g, ', ') || 'Óþekktur artisti');
                         return (
                             <Chart 
@@ -77,7 +78,7 @@ export default function Songs() {
                                 cardWidth={cardWidth}
                                 timeRange={timeRange}
                                 artistGenres={""}
-                                spotifyUrl={""}
+                                spotifyUrl={spotifyUrl}
                             />
                         )
                     })}

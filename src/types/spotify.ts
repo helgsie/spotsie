@@ -72,7 +72,7 @@ export interface TopArtist {
     name: string;
     popularity: number;
     genres: string[];
-    url: string;
+    url: string[];
     image: string;
     followers: number;
 }

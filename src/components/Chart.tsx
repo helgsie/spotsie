@@ -12,7 +12,7 @@ interface ChartProps {
     cardWidth: string;
     timeRange: string;
     artistGenres: string;
-    spotifyUrl: string;
+    spotifyUrl: string[];
 }
 
 const Chart: React.FC<ChartProps> = ({ 
@@ -30,6 +30,7 @@ const Chart: React.FC<ChartProps> = ({
 }) => {
     const cardTitles = Array.isArray(cardTitle) ? cardTitle : [cardTitle];
     const cardSubtitles = Array.isArray(cardSubtitle) ? cardSubtitle : [cardSubtitle];
+    const spotifyUrls = Array.isArray(spotifyUrl) ? spotifyUrl : [spotifyUrl];
 
     return (
         <div className="flex flex-col gap-1" data-time-range={timeRange}>
@@ -49,7 +50,7 @@ const Chart: React.FC<ChartProps> = ({
                         cardSubtitle={cardSubtitles[index] || ""}
                         cardWidth={cardWidth}
                         artistGenres={artistGenres}
-                        spotifyUrl={spotifyUrl}
+                        spotifyUrl={spotifyUrls[index]}
                     />
                 ))} 
             </div>

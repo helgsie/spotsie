@@ -47,7 +47,7 @@ export default function Artists() {
             const albumCovers = artists.map((artist: TopArtist) => artist?.image || '/assets/artist-placeholder.png');
             const cardTitles = artists.map((artist: TopArtist) => artist?.name) || 'Óþekktur artisti';
             const artistGenres = artists.flatMap((artist: TopArtist) => artist?.genres || []).join(', ');
-            const spotifyUrl = artists.flatMap((artist: TopArtist) => artist?.url || []).join(', ');
+            const spotifyUrl = artists.flatMap((artist: TopArtist) => artist?.url);
 
 
             return (     

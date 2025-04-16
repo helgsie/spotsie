@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import Link from "next/link";
+import BackCard from "./BackCard";
 
 export interface CardProps {
     key: number;
@@ -13,26 +14,56 @@ export interface CardProps {
     spotifyUrl: string;
 }
 
-const Card: React.FC<CardProps> = ({ imageShape, albumCover, cardTitle, cardSubtitle, cardWidth, spotifyUrl }) => {
-    return(
+const Card: React.FC<CardProps> = ({ 
+    imageShape, 
+    albumCover, 
+    cardTitle, 
+    cardSubtitle, 
+    cardWidth, 
+    spotifyUrl 
+}) => {
+    const [loaded, setLoaded] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+    
+    const parts = spotifyUrl.split("/");
+    const trackId = parts[parts.length - 1].split("?")[0];
+
+    useEffect(() => {
+        const node = cardRef.current;
+        if (!node) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setLoaded(true);
+                    observer.disconnect();
+                }
+            },
+            {
+                threshold: 0.1,
+            }
+        );
+
+        observer.observe(node);
+
+        return () => {
+            observer.unobserve(node);
+        };
+    }, []);
+
+    return (
         <Link href={spotifyUrl} className={`card flex flex-col gap-2 ${cardWidth}`}>
-            <div className="group [perspective:1000px] w-full aspect-square">
+            <div className="group [perspective:1000px] w-full aspect-square overflow-hidden">
                 <div className="relative w-full aspect-square group overflow-hidden">
                     {/* Framhlið */}
+                    {loaded && <BackCard genres={""} trackId={trackId} />}
+                    {/* Bakhlið */}
                     <Image 
                         src={albumCover || "/assets/album-placeholder.png"} 
                         alt="Album cover"
                         fill
                         className={`${imageShape} object-cover transition-opacity duration-500 group-hover:opacity-0 shadow-md shadow-slate-400`}
                         sizes="(min-width: 768px) 300px, 100vw"
-                    />
-                    {/* Spotify embed */}
-                    <iframe
-                        src={`https://open.spotify.com/embed/track/${spotifyUrl}?utm_source=generator`}
-                        width="100%"
-                        height="100%"
-                        allow="encrypted-media"
-                        className="absolute top-0 left-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-md"
                     />
                 </div>
             </div>
