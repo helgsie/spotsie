@@ -1,5 +1,6 @@
 import React from "react";
 import Card from './Card';
+import { SkeletonCard } from "./SkeletonCard";
 
 interface ChartProps {
     chartTitle: string;
@@ -13,6 +14,7 @@ interface ChartProps {
     timeRange: string;
     artistGenres: string;
     spotifyUrl: string[];
+    loading?: boolean;
 }
 
 const Chart: React.FC<ChartProps> = ({ 
@@ -26,7 +28,8 @@ const Chart: React.FC<ChartProps> = ({
     cardWidth, 
     timeRange,
     artistGenres,
-    spotifyUrl
+    spotifyUrl,
+    loading
 }) => {
     const cardTitles = Array.isArray(cardTitle) ? cardTitle : [cardTitle];
     const cardSubtitles = Array.isArray(cardSubtitle) ? cardSubtitle : [cardSubtitle];
@@ -40,19 +43,23 @@ const Chart: React.FC<ChartProps> = ({
                 </h1>
                 <p className={`text-s ${titleColor} font-bold px-2 opacity-80 sm:text-sm`}></p>
             </div>
-            <div className="flex flex-row gap-2 overflow-x-auto overflow-y-hidden no-scrollbar">
-                {cardTitles.map((title, index) => (
-                    <Card 
-                        key={index}
-                        imageShape={imageShape}
-                        albumCover={albumCover[index] || ""}
-                        cardTitle={`${index + 1}. ${title}`}
-                        cardSubtitle={cardSubtitles[index] || ""}
-                        cardWidth={cardWidth}
-                        artistGenres={artistGenres}
-                        spotifyUrl={spotifyUrls[index]}
-                    />
-                ))} 
+            <div className="overflow-x-auto overflow-y-hidden -ml-8 px-8 no-scrollbar">
+                <div className="flex flex-row gap-2">
+                    {loading
+                        ? Array.from({ length: 25 }).map((_, i) => <SkeletonCard key={i} cardWidth={cardWidth}/>)
+                        : cardTitles.map((title, index) => (
+                        <Card 
+                            key={index}
+                            imageShape={imageShape}
+                            albumCover={albumCover[index] || ""}
+                            cardTitle={`${index + 1}. ${title}`}
+                            cardSubtitle={cardSubtitles[index] || ""}
+                            cardWidth={cardWidth}
+                            artistGenres={artistGenres}
+                            spotifyUrl={spotifyUrls[index]}
+                        />
+                    ))} 
+                </div>
             </div>
         </div>
     );

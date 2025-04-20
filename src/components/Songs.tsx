@@ -4,8 +4,11 @@ import Chart from "./Chart";
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
 
 export default function Songs() {
-    const { data, isLoading } = useSpotifyTop();
-    console.log("data", data, "isLoading", isLoading);
+    const { data, isLoading, isError } = useSpotifyTop();
+
+    if (isError) {
+        return <p className="mx-auto my-10">Villa við að sækja gögn 😔</p>;
+    }
 
     const imageShape = 'rounded-md shadow-md';
     const cardWidth = 'min-w-28 lg:min-w-32';
@@ -28,7 +31,8 @@ export default function Songs() {
                             cardWidth={cardWidth}
                             timeRange={index === 0 ? "shortTerm" : index === 1 ? "mediumTerm" : "longTerm"} 
                             artistGenres={""} 
-                            spotifyUrl={[""]}                            
+                            spotifyUrl={[""]}
+                            loading={isLoading}                            
                         />
                     ))}
                     </div>
@@ -41,7 +45,7 @@ export default function Songs() {
         {
             title: "Síðustu 4 vikur",
             timeRange: "shortTerm",
-            tracks: data.shortTerm?.tracks || []
+            tracks: data.shortTerm?.tracks || [],
         },
         {
             title: "Síðustu 6 mánuði",
@@ -56,7 +60,7 @@ export default function Songs() {
     ];
 
     return (
-        <div className="">
+        <div className="mx-2">
             <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-3">
                     {chartConfigs.map((config, index) => {
