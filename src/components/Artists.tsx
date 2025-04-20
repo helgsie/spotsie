@@ -8,34 +8,26 @@ export default function Artists() {
     const { data, isError, isLoading } = useSpotifyTop();
       
     if (isError) {
-        return <p>Villa við að sækja gögn.</p>;
+        return <p className="mx-auto my-10">Villa við að sækja gögn 😔</p>;
     }
-
-    if (isLoading || !data) {
-        return <p className="mx-auto spinner">Sæki gögn...</p>;
-    }
-
-    console.log("Data from hook:", data);
 
     const chartConfigs = [
         {
             title: "Síðustu 4 vikur",
             timeRange: "shortTerm",
-            artists: data.shortTerm.artists || []
+            artists: data?.shortTerm.artists || [],
         },
         {
             title: "Síðustu 6 mánuði",
             timeRange: "mediumTerm",
-            artists: data.mediumTerm.artists || []
+            artists: data?.mediumTerm.artists || [],
         },
         {
             title: "Síðustu 12 mánuði",
             timeRange: "longTerm",
-            artists: data.longTerm.artists || []
+            artists: data?.longTerm.artists || [],
         }
     ];
-
-    console.log("Chart configs:", chartConfigs);
 
     const imageShape = 'rounded-full shadow-sm';
     const cardWidth = 'min-w-28 lg:min-w-32';
@@ -49,21 +41,21 @@ export default function Artists() {
             const artistGenres = artists.flatMap((artist: TopArtist) => artist?.genres || []).join(', ');
             const spotifyUrl = artists.flatMap((artist: TopArtist) => artist?.url);
 
-
             return (     
                 <Chart 
                     key={index}
                     imageShape={imageShape}
                     albumCover={albumCovers}
                     cardTitle={cardTitles}
-                    cardSubtitle={[""]}
+                    cardSubtitle=""
                     chartTitle={title}
                     titleColor="text-zinc-500"
                     titleBg="transparent"
                     cardWidth={cardWidth}
                     timeRange={timeRange} 
                     artistGenres={artistGenres} 
-                    spotifyUrl={spotifyUrl}                
+                    spotifyUrl={spotifyUrl}
+                    loading={isLoading}              
                 />
             )})}
         </div>

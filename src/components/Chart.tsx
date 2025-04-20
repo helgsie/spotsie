@@ -46,7 +46,7 @@ const Chart: React.FC<ChartProps> = ({
             <div className="overflow-x-auto overflow-y-hidden -ml-8 px-8 no-scrollbar">
                 <div className="flex flex-row gap-2">
                     {loading
-                        ? Array.from({ length: 25 }).map((_, i) => <SkeletonCard key={i} cardWidth={cardWidth}/>)
+                        ? Array.from({ length: 25 }).map((_, i) => <SkeletonCard key={i} cardWidth={cardWidth} imageShape={imageShape} cardSubtitle={cardSubtitle[i]}/>)
                         : cardTitles.map((title, index) => (
                         <Card 
                             key={index}

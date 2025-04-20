@@ -13,49 +13,21 @@ export default function Songs() {
     const imageShape = 'rounded-md shadow-md';
     const cardWidth = 'min-w-28 lg:min-w-32';
 
-    if (!data?.shortTerm?.tracks || !data?.mediumTerm?.tracks) {
-        return (
-            <div className="">
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-col gap-3">
-                    {["Síðustu 4 vikur", "Síðustu 6 mánuði", "Síðustu 12 mánuði"].map((title, index) => (
-                        <Chart 
-                            key={index}
-                            imageShape={imageShape}
-                            albumCover="/assets/album-placeholder.png"
-                            cardTitle=""
-                            cardSubtitle=""
-                            chartTitle={title}
-                            titleColor="text-zinc-500"
-                            titleBg="transparent"
-                            cardWidth={cardWidth}
-                            timeRange={index === 0 ? "shortTerm" : index === 1 ? "mediumTerm" : "longTerm"} 
-                            artistGenres={""} 
-                            spotifyUrl={[""]}
-                            loading={isLoading}                            
-                        />
-                    ))}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     const chartConfigs = [
         {
             title: "Síðustu 4 vikur",
             timeRange: "shortTerm",
-            tracks: data.shortTerm?.tracks || [],
+            tracks: data?.shortTerm?.tracks || [],
         },
         {
             title: "Síðustu 6 mánuði",
             timeRange: "mediumTerm",
-            tracks: data.mediumTerm?.tracks || []
+            tracks: data?.mediumTerm?.tracks || []
         },
         {
             title: "Síðustu 12 mánuði",
             timeRange: "longTerm",
-            tracks: data.longTerm?.tracks || []
+            tracks: data?.longTerm?.tracks || []
         }
     ];
 
@@ -83,6 +55,7 @@ export default function Songs() {
                                 timeRange={timeRange}
                                 artistGenres={""}
                                 spotifyUrl={spotifyUrl}
+                                loading={isLoading}
                             />
                         )
                     })}

@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ({
     return (
         <Link href={spotifyUrl} className={`card flex flex-col gap-2 ${cardWidth}`}>
             <div className="group [perspective:1000px] w-full aspect-square">
-                <div className="relative w-full aspect-square rounded-md group">
+                <div className="relative w-full aspect-square group">
                     {/* Framhlið */}
                     {loaded && <BackCard genres={""} trackId={trackId} />}
                     {/* Bakhlið */}
